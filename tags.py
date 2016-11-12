@@ -1,11 +1,11 @@
-''''
+'''
 this module contains functions that extracts metadata from
 mp3 file and returns a python list of UniCode Characters
 NOTE : Windows Does't support unicode in powershell and console by default
 
 run `chcp 65001` if you getting erros releted to unicode in windows
 
-''''
+'''
 
 from mutagen.id3 import ID3
 from bs4 import UnicodeDammit
