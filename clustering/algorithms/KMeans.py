@@ -31,8 +31,8 @@ class kMeansClustering:
             snippets - list of strings
         """
         self.snippets = snippets
-        for snippet in snippets:
-            print(snippet)
+        # for snippet in snippets:
+            # print(snippet)
         self.clusters = []
     
     def find_clusters(self, n_clusters = NUM_OF_CLUSTERS):
