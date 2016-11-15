@@ -6,8 +6,8 @@
 
 from __future__ import print_function
 from algorithms.KMeans import kMeansClustering
-from scrape.Scraper import Scraper, search_articles
-from config import api_urls, api_keys
+# from scrape.Scraper import Scraper, search_articles
+# from config import api_urls, api_keys
 
 NUM_OF_CLUSTERS = 6
 
