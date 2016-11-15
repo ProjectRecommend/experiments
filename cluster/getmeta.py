@@ -22,18 +22,22 @@ for filepath in music_files:
     # print("\n")
     tmp = ''
     # print(text)
+    # i am bundling all the tags of a file into a paratgraph (long string spaced by ' ')
     for i in text:
         tmp = tmp + i + " "
 
     metadata_list.append(tmp)
 
-# print(metadata_list)  
+# print(metadata_list)
 for i in range(len(metadata_list)):
     print(str(i) + " :", end=' ')
     print(metadata_list[i])
     print(music_files[i])
 
 print("-------------KMeans-------------")
+
+# Magic happnes here
+
 clusters = kMeansClustering(metadata_list)
 clusters.find_clusters(5)
 # print(clusters.get_common_phrases(2))
