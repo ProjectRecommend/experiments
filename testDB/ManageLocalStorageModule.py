@@ -72,7 +72,7 @@ class ManageLocalStorage(object):
 
             query = QSqlQuery(db)
            
-            isQuerySuccessful=query.exec_("create table songs(SID int auto_increment primary key , SPath varchar(255), isUpdated int)")
+            isQuerySuccessful=query.exec_("CREATE TABLE songs(SID INT AUTO_INCREMENT, SPath VARCHAR(255), isUpdated INT, PRIMARY KEY (SID))")
 
 
             """

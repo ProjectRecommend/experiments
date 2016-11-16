@@ -14,29 +14,38 @@ class accessTestDB:
 
         if self.db.isOpen():
             
-            record=QSqlQuery("SELECT * FROM songs WHERE SongID="+SongID,self.db)
+            queryString="SELECT SID, SPath, isUpdated FROM songs WHERE SPath='hello'"
+            record=self.query.exec_(queryString)
             
             if record:
-                print ("read successfull")
-                self.songDet["SPath"]=record.value(1)
-                self.songDet["isUpdated"]=record.value(2)
+                print ("read successfull, it seems")
+                a=0
+                while self.query.next():
+                    print ("executing times: ")
+                    print (a)
+                    a=a+1
+                    self.songDet["SID"]=self.query.value(0)
+                    self.songDet["SPath"]=self.query.value(1)
+                    self.songDet["isUpdated"]=self.query.value(2)
             else:
                 print ("read not successfull")
                 print ("error")
-                print (record.lastError().text())
+                print (self.query.lastError().text())
                 return False
         else:
             print ("-----------------------------could not read from database, connection is not open------------------------")
             return False
         return self.songDet
+
     def write(self,songPath):
         
         #fucntion returns true if the writing is successfull
         if self.db.isOpen():
-            queryString="insert into songs(SPath, isUpdated) values ("+songPath+",0)"
+            queryString="insert into songs(SPath, isUpdated) values ('"+ songPath+"',0)"
             record=self.query.exec_(queryString)
             if record:
                 print ("writing successfull")
+                print ("no of rows affected: "+str(self.query.numRowsAffected()))
             else:
                 print ("writing not successfull")
                 print ("error")
@@ -52,8 +61,8 @@ class accessTestDB:
         #function returns true if the record is successfully deleted
 
         if self.db.isOpen():
-            queryString="delete from songs where SID="+songID
-            record=query.exec_(queryString)
+            queryString="delete from songs where SID="+str(songID)
+            record=self.query.exec_(queryString)
 
             if record:
                 print ("deletion successfull")
