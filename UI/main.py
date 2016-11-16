@@ -1,5 +1,5 @@
 import sys  # We need sys so that we can pass argv to QApplication
-import mainWindow1  # This file holds our MainWindow and all design related things
+import mainWindow  # This file holds our MainWindow and all design related things
 # it also keeps events etc that we defined in Qt Designer
 from PyQt5.QtCore import QObject
 from PyQt5.QtMultimedia import *
@@ -7,7 +7,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5 import QtWidgets
 
-class ExampleApp(QtWidgets.QMainWindow, mainWindow1.Ui_MainWindow):
+class ExampleApp(QtWidgets.QMainWindow, mainWindow.Ui_MainWindow):
     def __init__(self):
         # super().__init__()
         # self.currentPlaylist = QMediaPlaylist()
@@ -27,7 +27,6 @@ class ExampleApp(QtWidgets.QMainWindow, mainWindow1.Ui_MainWindow):
     #     self.setWindowTitle('Offline Music Recommender')
     # def connect(self):
     #     self.pushButton.clicked.connect(self.playHandler)
-        
 
     # def playHandler(self):
     #     self.userAction = 1
