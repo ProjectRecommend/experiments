@@ -2,12 +2,14 @@
 import sys
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
 
-class ManageLocalStorage:
+class ManageLocalStorage(object):
 
     def __init__(self,isConnected,connectionName):
         
         self.isConnected=isConnected
         self.connectionName=connectionName
+
+
 
 
     """
@@ -23,7 +25,7 @@ class ManageLocalStorage:
 
         if we add a connection with the same name as the existing connection the new connection replaces the old one.
     """
-            
+
     def getConnectionName(self):
         
         return self.connectionName
@@ -31,7 +33,9 @@ class ManageLocalStorage:
     def setConnectionName(self,connectionName):
         
         self.connectionName=connectionName
+        return True
 
+            
     def getIsConnected(self):
         
         return self.isConnected
@@ -41,13 +45,13 @@ class ManageLocalStorage:
         self.isConnected = isConnected
 
 
-    def Build(self):
+    def build(self):
         db = QSqlDatabase.addDatabase('QSQLITE',self.connectionName)
         
         db.setDatabaseName('HelloworldTestDatabase')
-        db.setUserName('ProjectRecommend')
-        db.setPassword('elite1337')
-        db.setPort(1337)
+        db.setUserName('ProjectRecommendTestDatabase')
+        db.setPassword('password123')
+        db.setPort(1338)
 
         """
         Error testing : whether the creation of database and opening of connection is successful or not
@@ -68,7 +72,7 @@ class ManageLocalStorage:
 
             query = QSqlQuery(db)
            
-            isQuerySuccessful=query.exec_("create table songs(SID int auto_increment primary key , SPath varchar(255), isUpdated int, TIT2 varchar(255), TALB varchar(255), TPE1 varchar(255), TPE2 varchar(255), TSOP varchar(255), TDRC date, TCON varchar(255))")
+            isQuerySuccessful=query.exec_("create table songs(SID int auto_increment primary key , SPath varchar(255), isUpdated int)")
 
 
             """
@@ -114,7 +118,7 @@ class ManageLocalStorage:
     returns false if the database does not exists 
     """
 
-    def Dump(self):
+    def dump(self):
         
         """
         seems we cannot remove the database efficiently here so we need to essentially delete tables in the instance of the database already created
@@ -137,7 +141,7 @@ class ManageLocalStorage:
 
         return True
     
-    def Connect(self):
+    def connect(self):
         db=QSqlDatabase.database(self.connectionName,True)
         print ("database name being connected and the connection names are as follows: ")
         print (db.databaseName())
@@ -147,7 +151,7 @@ class ManageLocalStorage:
 
         return True
 
-    def Disconnect(self):
+    def disconnect(self):
         db=QSqlDatabase.database(self.connectionName,False)
         print ("database name being disconnected and the connection names are as follows: ")
         print (db.databaseName())
@@ -159,6 +163,8 @@ class ManageLocalStorage:
 
 """
 error correction code follows, do not use during final implementation
+"""
+
 """
 
 print ("Welcome to ManageLocalStorage, here are the following sets of commands: build, dump, connect, disconnect,-1 exiting")
@@ -191,8 +197,7 @@ while True:
         break
     else:
         print ("incorrect command")
-        
-
+"""
         
         
 

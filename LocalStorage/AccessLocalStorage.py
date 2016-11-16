@@ -6,9 +6,10 @@ import ManageLocalStorage
 
 class AccessLocalStorage:
 
-    SongPath=""    
-    db=QSqlDatabase.database(ManageLocalStorage.connectionName,True)# the second parameter also opens the connection if the connection is not already open
-    query=QSqlQuery(db)
+
+    def __init__(self):
+        self.db=QSqlDatabase.database(ManageLocalStorage.getConnectionName(),True)# the second parameter also opens the connection if the connection is not already open
+        self.query=QSqlQuery(self.db)
 
     # so basically querying on the instance of the database mentioned earlier
 
@@ -21,24 +22,19 @@ class AccessLocalStorage:
 
         songDet={}
 
-        if db.open():
+        if self.db.isOpen():
             
             """
             QSqlQuery(const QString &query = QString(), QSqlDatabase db = QSqlDatabase())
             accepts a query string and a database instance (of class QSqlDatabase) and the object can be 
             used for simply navigating the record(if select statement is used).
             """
-            record=QSqlQuery("SELECT * FROM songs WHERE SongID="+SongID,db)
+            record=QSqlQuery("SELECT * FROM songs WHERE SongID="+SongID,self.db)
 
             #now we can use record object (which is an QSqlQuery object) to navigate the record
 
         else:
-            QMessageBox.critical(None, "Cannot open database",
-                "Unable to establish a database connection.\n"
-                "This example needs SQLite support. Please read the Qt SQL "
-                "driver documentation for information how to build it.\n\n"
-                "Click Cancel to exit.",
-                QMessageBox.Cancel)
+            print ("could not read from the database, connection not found")
         """
         populating the dictionary songDet
         """
@@ -66,7 +62,7 @@ class AccessLocalStorage:
     def Write(self, SongPath):
 
         songDet={}
-        songDet= ManageMetaData.ReadMetaData(SongPath)
+        songDet= ManageMetaData.ReadMetaData(SongPath) #this will read metadata songPath.
 
         """
         the songDet format is always the same
@@ -81,11 +77,9 @@ class AccessLocalStorage:
         queryString="insert into songs (SPath,isUpdated,TIT2,TALB,TPE1,TPE2,TSOP,TDRC,TCON)values("+valuesString+")"
         isQuerySuccessful=query.exec_(queryString); 
         if isQuerySuccessful:
-            Prompt("information","insertion successful")
             print ("----------------------------------------------")
             print ("insertion successful")
         else:
-            Prompt("critical","insertion into database not successful")
             print ("----------------------------------------------")
             print ("insertion not successful")
         return True
@@ -94,11 +88,9 @@ class AccessLocalStorage:
     
         isQuerySuccessful=query.exec_("delete from songs WHERE SID="+SongID)
         if isQuerySuccessful:
-            Prompt("information","deleted successfully")
             print ("----------------------------------------------")
             print ("deletion successful")
         else:
-            Prompt("critical","could not delete")
             print ("----------------------------------------------")
             print ("could not delete")
 
@@ -108,20 +100,18 @@ class AccessLocalStorage:
     
         return SongPath
 
-    def setSongPath(self,SongP):
+    def setSongPath(self,SongPath):
 
-         songPath=songP
+         self.songPath=songPath
     """
     the following function is only for the purpose of testing purspose, delete this fucntion for release
     """
     def testQueries(self,queryInstance,query):
         
         queryInstance.exec_(query);
-        
-    def Prompt(self,messageType,messageText):
-        
-        if messageType=="information":
-            QMessageBox.information(None, "Message", messageText,QMessageBox.Cancel)
-        elif messageType=="critical":
-            QMessageBox.critical(None, "Message", messageText, QMessageBox.Cancel)
+
+print ("Welcome to AccessLocalStorage terminal, this terminal lets you build a database with song table and read and write data to it")
+print ("commands: build, dump, disconnect, connect, read, write, delete")
+a=AccessLocalStorage("C:/helloworld")
+
 
