@@ -36,7 +36,7 @@ class ManageLocalStorage:
     def Build(self):
         db = QSqlDatabase.addDatabase('QSQLITE',self.connectionName)
         
-        db.setDatabaseName('ProjectRecommendDatabase')
+        db.setDatabaseName('HelloworldTestDatabase')
         db.setUserName('ProjectRecommend')
         db.setPassword('elite1337')
         db.setPort(1337)
@@ -49,6 +49,7 @@ class ManageLocalStorage:
             # db.open() returns true if the connection is open obviously
             print ("----------------------------------------------")
             print ("could not open the database")
+            self.isConnected=False
             return False
         else:
             print ("----------------------------------------------")
@@ -60,7 +61,8 @@ class ManageLocalStorage:
             query = QSqlQuery(db)
            
             isQuerySuccessful=query.exec_("create table songs(SID int auto_increment primary key , SPath varchar(255), isUpdated int, TIT2 varchar(255), TALB varchar(255), TPE1 varchar(255), TPE2 varchar(255), TSOP varchar(255), TDRC date, TCON varchar(255))")
-            
+
+
             """
             isDeleteSuccessful=query.exec_("drop table if exists test")
             if isDeleteSuccessful:
@@ -89,6 +91,9 @@ class ManageLocalStorage:
                 error=query.lastError().text()
                 print (error)   
             
+            del query
+            del db
+            
             return True
 
     """
@@ -102,68 +107,46 @@ class ManageLocalStorage:
     """
 
     def Dump(self):
-        db=QSqlDatabase.database(self.connectionName)
-        #QSqlDatabase.database(<connection name >) gives us an instance of the QSqlDatabase for the connection given as a parameter
-        if self.getIsConnected():
-            print("database was connected")
+        
+        """
+        seems we cannot remove the database efficiently here so we need to essentially delete tables in the instance of the database already created
+        """
+        db=QSqlDatabase.database(self.connectionName,False)
 
-            self.Disconnect()#disconnecting the database first and then attempting remove
+        #just to close the connection I use False as the second parameter
 
-            if db.isOpen():
-                print ("connection is still open bro")
-            
-            isDatabaseRemoved=db.removeDatabase(self.connectionName)
-            
-            """
-            Error testing
-            """
-
-            if isDatabaseRemoved:
-                print ("----------------------------------------------")
-                print ("database removed")
-            else:
-                print ("----------------------------------------------")
-                print ("database could not be removed: ")
-                print (db.lastError().text())
-                return False
+        query=QSqlQuery(db)
+        isDeleteSuccessful=query.exec_("drop table songs")
+        
+        if isDeleteSuccessful:
+            print ("the table has been deleted successfully")
         else:
-            print("database was not connected")
-            #simply opening the connection
+            print ("the table could not be deleted")
+            print ("error:")
+            print (query.lastError().text())
 
-            isDatabaseRemoved=db.removeDatabase(self.connectionName)
+        del db
 
-            if isDatabaseRemoved:
-                print ("----------------------------------------------")
-                print ("database removed")
-            else:
-                print ("----------------------------------------------")
-                print ("database could not be removed: ")
-                print (db.lastError().text())
-                return False
         return True
     
     def Connect(self):
-        db=QSqlDatabase.database(self.connectionName)
-        # creating instance of the QSqlDatabase class, does not refer to any particular database
-        if not self.getIsConnected():
-            db.open()
-            #opens the connection
-        else:
-            return False
+        db=QSqlDatabase.database(self.connectionName,True)
+        print ("database name being connected and the connection names are as follows: ")
+        print (db.databaseName())
+        print (db.connectionName())
+        del db
+        self.isConnected=True
+
         return True
 
     def Disconnect(self):
-        db=QSqlDatabase.database(self.connectionName)
-        # creating instance of the database
+        db=QSqlDatabase.database(self.connectionName,False)
+        print ("database name being disconnected and the connection names are as follows: ")
+        print (db.databaseName())
+        print (db.connectionName())
+        del db
+        self.isConnected=False
 
-        if self.getIsConnected():
-            print ("closing the connection")
-            db.close()
-            print ("closed")
-            #closes the connection
-            self.setIsConnected(False)
-        else:
-            return False
         return True
 
 """
@@ -171,7 +154,7 @@ error correction code follows, do not use during final implementation
 """
 
 print ("Welcome to ManageLocalStorage, here are the following sets of commands: build, dump, connect, disconnect,-1 exiting")
-obj=ManageLocalStorage(False,'sqLiteConProjectRecommend') 
+obj=ManageLocalStorage(False,'sqLiteConProjectRecommendConnection') 
 while True:
     
     x=str(input('input:')) # this is some python 3 stuff.
