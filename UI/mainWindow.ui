@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
+    <width>705</width>
     <height>600</height>
    </rect>
   </property>
@@ -62,264 +62,67 @@
      <height>0</height>
     </size>
    </property>
-   <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>530</y>
+      <x>-1</x>
+      <y>-1</y>
       <width>701</width>
-      <height>41</height>
+      <height>451</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="Timeline">
-     <item>
-      <widget class="QLabel" name="CurrentTime">
-       <property name="font">
-        <font>
-         <family>Open Sans</family>
-         <pointsize>10</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Time</string>
-       </property>
-      </widget>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="1">
+      <widget class="QTableView" name="RecommendLocal"/>
      </item>
-     <item>
-      <widget class="QSlider" name="ProgressBar">
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:horizontal {
-border: 1px solid #bbb;
-background: white;
-height: 10px;
-border-radius: 4px;
-}
-
-QSlider::sub-page:horizontal {
-background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,
-    stop: 0 #66e, stop: 1 #bbf);
-background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,
-    stop: 0 #bbf, stop: 1 #55f);
-border: 1px solid #777;
-height: 10px;
-border-radius: 4px;
-}
-
-QSlider::add-page:horizontal {
-background: #fff;
-border: 1px solid #777;
-height: 10px;
-border-radius: 4px;
-}
-
-QSlider::handle:horizontal {
-background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-    stop:0 #eee, stop:1 #ccc);
-border: 1px solid #777;
-width: 13px;
-margin-top: -2px;
-margin-bottom: -2px;
-border-radius: 4px;
-}
-
-QSlider::handle:horizontal:hover {
-background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-    stop:0 #fff, stop:1 #ddd);
-border: 1px solid #444;
-border-radius: 4px;
-}
-
-QSlider::sub-page:horizontal:disabled {
-background: #bbb;
-border-color: #999;
-}
-
-QSlider::add-page:horizontal:disabled {
-background: #eee;
-border-color: #999;
-}
-
-QSlider::handle:horizontal:disabled {
-background: #eee;
-border: 1px solid #aaa;
-border-radius: 4px;
-}</string>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="tickInterval">
-        <number>0</number>
-       </property>
-      </widget>
+     <item row="1" column="1">
+      <widget class="QTableView" name="RecommedOnline"/>
      </item>
-     <item>
-      <widget class="QLabel" name="TotalTime">
-       <property name="font">
-        <font>
-         <family>Open Sans</family>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Time</string>
-       </property>
-      </widget>
+     <item row="0" column="0" rowspan="2">
+      <widget class="QTableView" name="Playlist"/>
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QWidget" name="gridLayoutWidget_3">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>420</y>
-      <width>481</width>
-      <height>111</height>
+      <y>450</y>
+      <width>701</width>
+      <height>131</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="SongInfo" stretch="0,0,0">
-     <property name="spacing">
-      <number>0</number>
-     </property>
-     <property name="sizeConstraint">
-      <enum>QLayout::SetFixedSize</enum>
-     </property>
-     <property name="leftMargin">
-      <number>0</number>
-     </property>
-     <property name="topMargin">
-      <number>0</number>
-     </property>
-     <property name="bottomMargin">
-      <number>5</number>
-     </property>
-     <item>
-      <widget class="QLabel" name="SongTitle">
-       <property name="font">
-        <font>
-         <family>Open Sans</family>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>SongName </string>
-       </property>
-       <property name="indent">
-        <number>5</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="SongArtist">
-       <property name="font">
-        <font>
-         <family>Open Sans</family>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Singer</string>
-       </property>
-       <property name="indent">
-        <number>5</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="SongAlbum">
-       <property name="font">
-        <font>
-         <family>Open Sans</family>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Album</string>
-       </property>
-       <property name="indent">
-        <number>5</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QTableView" name="RecommendLocal">
-    <property name="geometry">
-     <rect>
-      <x>399</x>
-      <y>1</y>
-      <width>301</width>
-      <height>201</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QTableView" name="RecommedOnline">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>200</y>
-      <width>301</width>
-      <height>221</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QTableView" name="Playlist">
-    <property name="geometry">
-     <rect>
-      <x>1</x>
-      <y>1</y>
-      <width>401</width>
-      <height>421</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_4">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>480</y>
-      <width>221</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="Volume">
-     <item>
-      <widget class="QPushButton" name="VolumeDecr">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>icons/ic_volume_down.png</normaloff>icons/ic_volume_down.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>15</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSlider" name="VolumeSeekBar">
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:horizontal {
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="1" column="0">
+      <layout class="QHBoxLayout" name="Timeline">
+       <item>
+        <widget class="QLabel" name="CurrentTime">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>10</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Time</string>
+         </property>
+         <property name="margin">
+          <number>2</number>
+         </property>
+         <property name="indent">
+          <number>2</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="ProgressBar">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QSlider::groove:horizontal {
 border: 1px solid #bbb;
 background: white;
 height: 10px;
@@ -375,170 +178,374 @@ background: #eee;
 border: 1px solid #aaa;
 border-radius: 4px;
 }</string>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="tickInterval">
-        <number>0</number>
-       </property>
-      </widget>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="tickInterval">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="TotalTime">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Time</string>
+         </property>
+         <property name="margin">
+          <number>2</number>
+         </property>
+         <property name="indent">
+          <number>2</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-     <item>
-      <widget class="QPushButton" name="VolumeIncr">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>icons/ic_volume_up.png</normaloff>icons/ic_volume_up.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>15</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Mute">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mute&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>icons/ic_volume_off.png</normaloff>icons/ic_volume_off.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>20</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>420</y>
-      <width>221</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="Player">
-     <item>
-      <widget class="QPushButton" name="Prev">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Previous&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>icons/ic_skip_previous.png</normaloff>icons/ic_skip_previous.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="default">
-        <bool>false</bool>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Stop">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stop&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>icons/ic_stop.png</normaloff>icons/ic_stop.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="PlayPause">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Play/Pause&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>icons/ic_play_pause.png</normaloff>icons/ic_play_pause.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Next">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Next&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>icons/ic_skip_next.png</normaloff>icons/ic_skip_next.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="default">
-        <bool>false</bool>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
+     <item row="0" column="0">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="1">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="1">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="SongTitle">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>12</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>SongName</string>
+         </property>
+         <property name="indent">
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="SongAlbum">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Album</string>
+         </property>
+         <property name="indent">
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="SongArtist">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Singer</string>
+         </property>
+         <property name="indent">
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" rowspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="Prev">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Previous&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>icons/ic_skip_previous.png</normaloff>icons/ic_skip_previous.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Stop">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stop&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>icons/ic_stop.png</normaloff>icons/ic_stop.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="PlayPause">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Play/Pause&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>icons/ic_play_pause.png</normaloff>icons/ic_play_pause.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Next">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Next&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>icons/ic_skip_next.png</normaloff>icons/ic_skip_next.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="2">
+        <layout class="QHBoxLayout" name="Volume">
+         <item>
+          <widget class="QPushButton" name="VolumeDecr">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>icons/ic_volume_down.png</normaloff>icons/ic_volume_down.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>15</width>
+             <height>15</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="VolumeSeekBar">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QSlider::groove:horizontal {
+border: 1px solid #bbb;
+background: white;
+height: 10px;
+border-radius: 4px;
+}
+
+QSlider::sub-page:horizontal {
+background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,
+    stop: 0 #66e, stop: 1 #bbf);
+background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,
+    stop: 0 #bbf, stop: 1 #55f);
+border: 1px solid #777;
+height: 10px;
+border-radius: 4px;
+}
+
+QSlider::add-page:horizontal {
+background: #fff;
+border: 1px solid #777;
+height: 10px;
+border-radius: 4px;
+}
+
+QSlider::handle:horizontal {
+background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+    stop:0 #eee, stop:1 #ccc);
+border: 1px solid #777;
+width: 13px;
+margin-top: -2px;
+margin-bottom: -2px;
+border-radius: 4px;
+}
+
+QSlider::handle:horizontal:hover {
+background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+    stop:0 #fff, stop:1 #ddd);
+border: 1px solid #444;
+border-radius: 4px;
+}
+
+QSlider::sub-page:horizontal:disabled {
+background: #bbb;
+border-color: #999;
+}
+
+QSlider::add-page:horizontal:disabled {
+background: #eee;
+border-color: #999;
+}
+
+QSlider::handle:horizontal:disabled {
+background: #eee;
+border: 1px solid #aaa;
+border-radius: 4px;
+}</string>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="tickInterval">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="VolumeIncr">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>icons/ic_volume_up.png</normaloff>icons/ic_volume_up.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>15</width>
+             <height>15</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Mute">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mute&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>icons/ic_volume_off.png</normaloff>icons/ic_volume_off.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
@@ -548,7 +555,7 @@ border-radius: 4px;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>700</width>
+     <width>705</width>
      <height>21</height>
     </rect>
    </property>
