@@ -5,20 +5,19 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtMultimedia import *
 from PyQt5.QtCore import *
 
+
 class MainWindow(QMainWindow):
-def __init__(self):
+    def __init__(self):
         super().__init__()
-
-
         self.currentPlaylist = QMediaPlaylist()
         self.player = QMediaPlayer()
-        self.userAction = -1			#0- stopped, 1- playing 2-paused
+        self.userAction = -1        # 0- stopped, 1- playing 2-paused
         self.player.mediaStatusChanged.connect(self.qmp_mediaStatusChanged)
         self.player.stateChanged.connect(self.qmp_stateChanged)
         self.player.positionChanged.connect(self.qmp_positionChanged)
         self.player.volumeChanged.connect(self.qmp_volumeChanged)
         self.player.setVolume(60)
-        #Status bar
+        # Status bar
         self.statusBar().showMessage('Project Recommend')
         self.homeScreen()
 
@@ -32,10 +31,10 @@ def __init__(self):
         centralWidget.setLayout(controlBar)
         self.setCentralWidget(centralWidget)
 
-        #Set Dimensions of the MainWindow
+        # Set Dimensions of the MainWindow
         self.resize(400,300)
 
-        #show everything.
+        # show everything.
         self.show()
 
     def createMenubar(self):
@@ -50,31 +49,31 @@ def __init__(self):
         pass
 
     def addControls(self):
-        controlArea = QVBoxLayout()		#centralWidget
+        controlArea = QVBoxLayout()    # centralWidget
         seekSliderLayout = QHBoxLayout()
         controls = QHBoxLayout()
         controls1 = QHBoxLayout()
         playlistCtrlLayout = QHBoxLayout()
 
-        #creating buttons
-        playBtn = QPushButton('Play')		#play button
-        pauseBtn = QPushButton('Pause')		#pause button
-        stopBtn = QPushButton('Stop')		#stop button
-        volumeDescBtn = QPushButton('V-')#Decrease Volume
-        volumeIncBtn = QPushButton('V+')	#Increase Volume
+        # creating buttons
+        playBtn = QPushButton('Play')   # play button
+        pauseBtn = QPushButton('Pause')    # pause button
+        stopBtn = QPushButton('Stop')    # stop button
+        volumeDescBtn = QPushButton('V-')   # Decrease Volume
+        volumeIncBtn = QPushButton('V+')    # Increase Volume
 
-        #creating playlist controls
+        # creating playlist controls
         prevBtn = QPushButton('Prev Song')
         nextBtn = QPushButton('Next Song')
 
-        #creating seek slider
+        # creating seek slider
         seekSlider = QSlider()
         seekSlider.setMinimum(0)
         seekSlider.setMaximum(100)
         seekSlider.setOrientation(Qt.Horizontal)
         seekSlider.setTracking(True)
         seekSlider.sliderMoved.connect(self.seekPosition)
-        #seekSlider.valueChanged.connect(self.seekPosition)
+        # seekSlider.valueChanged.connect(self.seekPosition)
 
         seekSliderLabel1 = QLabel('0.00')
         seekSliderLabel2 = QLabel('0.00')
@@ -82,30 +81,27 @@ def __init__(self):
         seekSliderLayout.addWidget(seekSlider)
         seekSliderLayout.addWidget(seekSliderLabel2)
 
-        #Add handler for each button. Not using the default slots.
+        # Add handler for each button. Not using the default slots.
         playBtn.clicked.connect(self.playHandler)
         pauseBtn.clicked.connect(self.pauseHandler)
         stopBtn.clicked.connect(self.stopHandler)
         volumeDescBtn.clicked.connect(self.decreaseVolume)
         volumeIncBtn.clicked.connect(self.increaseVolume)
 
-        #Adding to the horizontal layout
-
+        # Adding to the horizontal layout
         controls.addWidget(playBtn)
         controls.addWidget(pauseBtn)
         controls.addWidget(stopBtn)
-
         controls1.addWidget(volumeIncBtn)
         controls1.addWidget(volumeDescBtn)
 
-
-        #playlist control button handlers
+        # playlist control button handlers
         prevBtn.clicked.connect(self.prevItemPlaylist)
         nextBtn.clicked.connect(self.nextItemPlaylist)
         playlistCtrlLayout.addWidget(prevBtn)
         playlistCtrlLayout.addWidget(nextBtn)
 
-        #Adding to the vertical layout
+        # Adding to the vertical layout
         controlArea.addLayout(seekSliderLayout)
         controlArea.addLayout(controls)
         controlArea.addLayout(controls1)
@@ -165,8 +161,8 @@ def __init__(self):
         sliderLayout = self.centralWidget().layout().itemAt(0).layout()
         if senderType == False:
             sliderLayout.itemAt(1).widget().setValue(position)
-        #update the text label
-        sliderLayout.itemAt(0).widget().setText('%d:%02d'%(int(position/60000),int((position/1000)%60)))
+        # update the text label
+        sliderLayout.itemAt(0).widget().setText('%d:%02d'%(int(position/60000), int((position/1000)%60)))
 
     def seekPosition(self, position):
         sender = self.sender()
@@ -223,7 +219,7 @@ def __init__(self):
                 it.next()
 
     def songInfo(self):
-        infoAc = QAction('Info',self)
+        infoAc = QAction('Info', self)
         infoAc.setShortcut('Ctrl+I')
         infoAc.setStatusTip('Displays Current Song Information')
         infoAc.triggered.connect(self.displaySongInfo)
@@ -240,7 +236,7 @@ def __init__(self):
         infoBox.setWindowTitle('Detailed Song Information')
         infoBox.setTextFormat(Qt.RichText)
         infoBox.setText(fullText)
-        infoBox.addButton('OK',QMessageBox.AcceptRole)
+        infoBox.addButton('OK', QMessageBox.AcceptRole)
         infoBox.show()
 
     def prevItemPlaylist(self):
@@ -250,23 +246,22 @@ def __init__(self):
         self.player.playlist().next()
 
     def exitAction(self):
-        exitAc = QAction('&Exit',self)
+        exitAc = QAction('&Exit', self)
         exitAc.setShortcut('Ctrl+Q')
         exitAc.setStatusTip('Exit App')
         exitAc.triggered.connect(self.closeEvent)
         return exitAc
 
-    def closeEvent(self,event):
-        reply = QMessageBox.question(self,'Warning!','Do you really want to exit?',QMessageBox.Yes|QMessageBox.No,QMessageBox.Yes)
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self,'Warning!','Do you really want to exit?', QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
 
-        if reply == QMessageBox.Yes :
+        if reply == QMessageBox.Yes:
             qApp.quit()
-        else :
+        else:
             try:
                 event.ignore()
             except AttributeError:
                 pass
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
