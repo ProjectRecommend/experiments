@@ -92,7 +92,7 @@
       <height>131</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_3">
+    <layout class="QGridLayout" name="Player">
      <item row="1" column="0">
       <layout class="QHBoxLayout" name="Timeline">
        <item>
@@ -209,7 +209,7 @@ border-radius: 4px;
       </layout>
      </item>
      <item row="0" column="0">
-      <layout class="QGridLayout" name="gridLayout_2">
+      <layout class="QGridLayout" name="SongInfoAndControls">
        <item row="0" column="1">
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -300,7 +300,7 @@ border-radius: 4px;
         </widget>
        </item>
        <item row="0" column="2" rowspan="2">
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QHBoxLayout" name="PlayerControls">
          <item>
           <widget class="QPushButton" name="Prev">
            <property name="toolTip">
@@ -406,7 +406,10 @@ border-radius: 4px;
          <item>
           <widget class="QPushButton" name="VolumeDecr">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
+           </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Decrease Volume&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
             <string/>
@@ -417,8 +420,8 @@ border-radius: 4px;
            </property>
            <property name="iconSize">
             <size>
-             <width>15</width>
-             <height>15</height>
+             <width>25</width>
+             <height>25</height>
             </size>
            </property>
            <property name="flat">
@@ -427,80 +430,12 @@ border-radius: 4px;
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="VolumeSeekBar">
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QSlider::groove:horizontal {
-border: 1px solid #bbb;
-background: white;
-height: 10px;
-border-radius: 4px;
-}
-
-QSlider::sub-page:horizontal {
-background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,
-    stop: 0 #66e, stop: 1 #bbf);
-background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,
-    stop: 0 #bbf, stop: 1 #55f);
-border: 1px solid #777;
-height: 10px;
-border-radius: 4px;
-}
-
-QSlider::add-page:horizontal {
-background: #fff;
-border: 1px solid #777;
-height: 10px;
-border-radius: 4px;
-}
-
-QSlider::handle:horizontal {
-background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-    stop:0 #eee, stop:1 #ccc);
-border: 1px solid #777;
-width: 13px;
-margin-top: -2px;
-margin-bottom: -2px;
-border-radius: 4px;
-}
-
-QSlider::handle:horizontal:hover {
-background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-    stop:0 #fff, stop:1 #ddd);
-border: 1px solid #444;
-border-radius: 4px;
-}
-
-QSlider::sub-page:horizontal:disabled {
-background: #bbb;
-border-color: #999;
-}
-
-QSlider::add-page:horizontal:disabled {
-background: #eee;
-border-color: #999;
-}
-
-QSlider::handle:horizontal:disabled {
-background: #eee;
-border: 1px solid #aaa;
-border-radius: 4px;
-}</string>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="tickInterval">
-            <number>0</number>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="VolumeIncr">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
+           </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase Volume&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
             <string/>
@@ -511,8 +446,8 @@ border-radius: 4px;
            </property>
            <property name="iconSize">
             <size>
-             <width>15</width>
-             <height>15</height>
+             <width>25</width>
+             <height>25</height>
             </size>
            </property>
            <property name="flat">
@@ -581,6 +516,7 @@ border-radius: 4px;
     </property>
     <addaction name="actionAbout_Project"/>
     <addaction name="actionSee_Source_on_Github"/>
+    <addaction name="actionReport_Bug"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -637,6 +573,15 @@ border-radius: 4px;
    </property>
    <property name="text">
     <string>See Source Code</string>
+   </property>
+  </action>
+  <action name="actionReport_Bug">
+   <property name="icon">
+    <iconset>
+     <normaloff>icons/ic_bug_report.png</normaloff>icons/ic_bug_report.png</iconset>
+   </property>
+   <property name="text">
+    <string>Report Bug</string>
    </property>
   </action>
  </widget>
