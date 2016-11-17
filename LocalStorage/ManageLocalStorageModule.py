@@ -31,6 +31,7 @@ class ManageLocalStorage:
     def setConnectionName(self,connectionName):
         
         self.connectionName=connectionName
+        return True
 
     def getIsConnected(self):
         
@@ -68,7 +69,7 @@ class ManageLocalStorage:
 
             query = QSqlQuery(db)
            
-            isQuerySuccessful=query.exec_("create table songs(SID int auto_increment primary key , SPath varchar(255), isUpdated int, TIT2 varchar(255), TALB varchar(255), TPE1 varchar(255), TPE2 varchar(255), TSOP varchar(255), TDRC date, TCON varchar(255))")
+            isQuerySuccessful=query.exec_("create table songs(SID int, SPath varchar(255), isUpdated int, TIT2 varchar(255), TALB varchar(255), TPE1 varchar(255), TPE2 varchar(255), TSOP varchar(255), TDRC date, TCON varchar(255),primary key(SID))")
 
 
             """

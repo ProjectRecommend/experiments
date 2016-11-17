@@ -2,14 +2,21 @@
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
 from MetaData import ManageMetaData
-import ManageLocalStorage
+from ManageLocalStorageModule import ManageLocalStorage
+
+"""
+WARNING: Do not initialize 2 separate instances of QSqlDatabase class while handling the database actions 
+"""
 
 class AccessLocalStorage:
 
 
-    def __init__(self):
-        self.db=QSqlDatabase.database(ManageLocalStorage.getConnectionName(),True)# the second parameter also opens the connection if the connection is not already open
+    def __init__(self,connectionName):
+        self.db=QSqlDatabase.database(connectionName,True)# the second parameter also opens the connection if the connection is not already open
+        #print("current connectionName:")
+        #print(self.db.connectionName())  
         self.query=QSqlQuery(self.db)
+        self.songDet={}
 
     # so basically querying on the instance of the database mentioned earlier
 
@@ -20,7 +27,6 @@ class AccessLocalStorage:
 
     def Read(self,SongID):
 
-        songDet={}
 
         if self.db.isOpen():
             
@@ -29,28 +35,44 @@ class AccessLocalStorage:
             accepts a query string and a database instance (of class QSqlDatabase) and the object can be 
             used for simply navigating the record(if select statement is used).
             """
-            record=QSqlQuery("SELECT * FROM songs WHERE SongID="+SongID,self.db)
+
+            #queryString="SELECT SID, SPath, isUpdated FROM songs WHERE SID="+str(songID)
+            #record=self.query.exec_(queryString)
+
+            queryString="SELECT SID,SPath,isUpdated,TIT2,TALB,TPE1,TPE2,TSOP,TDRC,TCON FROM songs WHERE SongID="+str(SongID)
+            record=self.query.exec_(queryString)
 
             #now we can use record object (which is an QSqlQuery object) to navigate the record
 
-        else:
-            print ("could not read from the database, connection not found")
-        """
-        populating the dictionary songDet
-        """
-        songDet["SPath"]=record.value(1)
-        songDet["isUpdated"]=record.value(2)
-        songDet["TIT2"]=record.value(3)
-        songDet["TALB"]=record.value(4)
-        songDet["TPE1"]=record.value(5)
-        songDet["TPE2"]=record.value(6)
-        songDet["TSOP"]=record.value(7)
-        songDet["TDRC"]=record.value(8)
-        songDet["TCON"]=record.value(9)
+            if record:
+                if record:
+                    print ("read successfull, it seems")
+                    a=0
+                    while self.query.next():
+                        print ("executing times: ")
+                        print (a)
+                        a=a+1
+                        self.songDet["SID"]=self.query.value(0)
+                        self.songDet["SPath"]=self.query.value(1)
+                        self.songDet["isUpdated"]=self.query.value(2)
+                        self.songDet["TIT2"]=self.query.value(3)
+                        self.songDet["TALB"]=self.query.value(4)
+                        self.songDet["TPE1"]=self.query.value(5)
+                        self.songDet["TPE2"]=self.query.value(6)
+                        self.songDet["TSOP"]=self.query.value(7)
+                        self.songDet["TDRC"]=self.query.value(8)
+                        self.songDet["TCON"]=self.query.value(9)
+                else:
+                    print ("read not successfull")
+                    print ("error")
+                    print (self.query.lastError().text())
+                    return False
 
-        print "the songDet dictionary is:"+songDet
-
-        return songDet
+                
+            else:
+                print ("could not read from the database, connection not found")
+                return False
+        return self.songDet
 
         
     """
@@ -60,40 +82,63 @@ class AccessLocalStorage:
     """
 
     def Write(self, SongPath):
-
-        songDet={}
-        songDet= ManageMetaData.ReadMetaData(SongPath) #this will read metadata songPath.
+        
+        if self.db.isOpen():
+            songDet={}
+            songDet= ManageMetaData.ReadMetaData(SongPath) #this will read metadata songPath.
 
         """
         the songDet format is always the same
         """ 
-        valuesList=songDet.values()    
-        valuesString="" 
-        for i in range(9):
-            if not i==8:
-                valuesString=valuesString+valuesList[i]+","
+            valuesList=songDet.values()    
+            valuesString="" 
+            for i in range(9):
+                if not i==8:
+                    valuesString=valuesString+valuesList[i]+","
+                else:
+                    valuesString=valuesString+valuesList[i]
+            queryString="select * from songs"
+            record=self.query.exec_(queryString)
+            size=0
+
+            while self.query.next():
+                size=size+1
+
+            valuesString=str(size+1)+","+valuesString
+
+            queryString="insert into songs (SID,SPath,isUpdated,TIT2,TALB,TPE1,TPE2,TSOP,TDRC,TCON) values ("+valuesString+")"
+            isQuerySuccessful=query.exec_(queryString); 
+            if isQuerySuccessful:
+                print ("----------------------------------------------")
+                print ("insertion successful")
+                print ("no of rows affected: "+str(self.query.numRowsAffected()))
             else:
-                valuesString=valuesString+valuesList[i]
-        queryString="insert into songs (SPath,isUpdated,TIT2,TALB,TPE1,TPE2,TSOP,TDRC,TCON)values("+valuesString+")"
-        isQuerySuccessful=query.exec_(queryString); 
-        if isQuerySuccessful:
-            print ("----------------------------------------------")
-            print ("insertion successful")
+                print ("----------------------------------------------")
+                print ("insertion not successful")
+                print ("error:")
+                print (self.query.lastError().text())
+                return False
         else:
-            print ("----------------------------------------------")
-            print ("insertion not successful")
+            print ("connection could not be established")
+            return False
         return True
     
     def Delete(self, SongID):
     
-        isQuerySuccessful=query.exec_("delete from songs WHERE SID="+SongID)
-        if isQuerySuccessful:
-            print ("----------------------------------------------")
-            print ("deletion successful")
-        else:
-            print ("----------------------------------------------")
-            print ("could not delete")
+        if self.db.isOpen():
 
+            isQuerySuccessful=query.exec_("delete from songs WHERE SID="+str(SongID))
+            if isQuerySuccessful:
+                print ("----------------------------------------------")
+                print ("deletion successful")
+            else:
+                print ("----------------------------------------------")
+                print ("could not delete")
+                print ("error")
+                print (self.query.lastError().text())
+        else:
+            print ("could not establish a connection")
+            return False
         return True
 
     def getSongPath(self):
@@ -110,8 +155,8 @@ class AccessLocalStorage:
         
         queryInstance.exec_(query);
 
-print ("Welcome to AccessLocalStorage terminal, this terminal lets you build a database with song table and read and write data to it")
-print ("commands: build, dump, disconnect, connect, read, write, delete")
-a=AccessLocalStorage("C:/helloworld")
+#print ("Welcome to AccessLocalStorage terminal, this terminal lets you build a database with song table and read and write data to it")
+#print ("commands: build, dump, disconnect, connect, read, write, delete")
+
 
 

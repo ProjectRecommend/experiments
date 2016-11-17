@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
-#from MetaData import ManageMetaData
+from MetaData import ManageMetaData
 from ManageLocalStorageModule import ManageLocalStorage
 class accessTestDB:
     def __init__(self,connectionName):
