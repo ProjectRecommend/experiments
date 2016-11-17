@@ -14,7 +14,7 @@ class accessTestDB:
 
         if self.db.isOpen():
             
-            queryString="SELECT SID, SPath, isUpdated FROM songs WHERE SPath='hello'"
+            queryString="SELECT SID, SPath, isUpdated FROM songs WHERE SID="+str(songID)
             record=self.query.exec_(queryString)
             
             if record:
@@ -39,9 +39,22 @@ class accessTestDB:
 
     def write(self,songPath):
         
-        #fucntion returns true if the writing is successfull
+        #function returns true if the writing is successfull
+
+        #seems that auto_increment is not working and so this is the workaround
+
         if self.db.isOpen():
-            queryString="insert into songs(SPath, isUpdated) values ('"+ songPath+"',0)"
+            
+            #so we are essentially reading the number of rows already inserted and inserting the SID accordingly
+            size=0
+            queryString="SELECT * FROM songs"
+            record=self.query.exec_(queryString)
+            while self.query.next():
+                size=size+1
+            
+            print ("count returned:")
+            print(size)
+            queryString="insert into songs(SID,SPath, isUpdated) values ("+str(size+1)+",'"+ songPath+"',0)"
             record=self.query.exec_(queryString)
             if record:
                 print ("writing successfull")
