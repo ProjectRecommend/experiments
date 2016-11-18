@@ -51,3 +51,6 @@ __pycache__
 
 # VS Code
 .vscode
+
+# pycharm
+.idea
