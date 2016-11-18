@@ -45,33 +45,32 @@ class AccessLocalStorage:
             #now we can use record object (which is an QSqlQuery object) to navigate the record
 
             if record:
-                if record:
-                    print ("read successfull, it seems")
-                    a=0
-                    while self.query.next():
-                        print ("executing times: ")
-                        print (a)
-                        a=a+1
-                        self.songDet["SID"]=self.query.value(0)
-                        self.songDet["SPath"]=self.query.value(1)
-                        self.songDet["isUpdated"]=self.query.value(2)
-                        self.songDet["TIT2"]=self.query.value(3)
-                        self.songDet["TALB"]=self.query.value(4)
-                        self.songDet["TPE1"]=self.query.value(5)
-                        self.songDet["TPE2"]=self.query.value(6)
-                        self.songDet["TSOP"]=self.query.value(7)
-                        self.songDet["TDRC"]=self.query.value(8)
-                        self.songDet["TCON"]=self.query.value(9)
-                else:
-                    print ("read not successfull")
-                    print ("error")
-                    print (self.query.lastError().text())
-                    return False
-
                 
+                print ("read successfull, it seems")
+                a=0
+                while self.query.next():
+                    print ("executing times: ")
+                    print (a)
+                    a=a+1
+                    self.songDet["SID"]=self.query.value(0)
+                    self.songDet["SPath"]=self.query.value(1)
+                    self.songDet["isUpdated"]=self.query.value(2)
+                    self.songDet["TIT2"]=self.query.value(3)
+                    self.songDet["TALB"]=self.query.value(4)
+                    self.songDet["TPE1"]=self.query.value(5)
+                    self.songDet["TPE2"]=self.query.value(6)
+                    self.songDet["TSOP"]=self.query.value(7)
+                    self.songDet["TDRC"]=self.query.value(8)
+                    self.songDet["TCON"]=self.query.value(9)
             else:
-                print ("could not read from the database, connection not found")
+                print ("read not successfull")
+                print ("error")
+                print (self.query.lastError().text())
                 return False
+              
+        else:
+            print ("could not read from the database, connection not found")
+            return False
         return self.songDet
 
         
@@ -79,7 +78,7 @@ class AccessLocalStorage:
     the following function writes song details, like its metadata and so on into the database, it is
     passed the songPath only, it calls the function ReadMetaData which returns a dictionary containing key value 
     pairs of the songMetadata
-    """
+    """ 
 
     def Write(self, SongPath):
         
