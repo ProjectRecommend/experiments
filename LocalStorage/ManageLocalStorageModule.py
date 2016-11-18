@@ -45,7 +45,7 @@ class ManageLocalStorage:
     def Build(self):
         db = QSqlDatabase.addDatabase('QSQLITE',self.connectionName)
         
-        db.setDatabaseName('HelloworldTestDatabase')
+        db.setDatabaseName('PRLocalStorage')
         db.setUserName('ProjectRecommend')
         db.setPassword('elite1337')
         db.setPort(1337)
