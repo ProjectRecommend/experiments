@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import os
+import const
 from mainWindow import Ui_MainWindow
 
 
@@ -94,37 +95,10 @@ def crawlFolder(folderPath):
 
 def saveSettings():
     print("settings")
-    orgName = "ProjectRecommend"
-    projName = "Recommend"
-    musicFolderLocation = None
-    volume = None
-    LS_connectionName = "LS_connection"
-    LS_db = "LS_db"
-    LS_username = "LS_user"
-    LS_password = "LS_pass"
-    LS_port = "1337"
-    C_connectionName = "C_connection"
-    C_db = "C_db"
-    C_username = "C_user"
-    C_password = "C_pass"
-    C_port = "1338"
 
     # save settings to Ini Format in User scope
-    settings = QtCore.QSettings(QtCore.QSettings.IniFormat, QtCore.QSettings.UserScope , orgName, projName)
+    settings = QtCore.QSettings(QtCore.QSettings.IniFormat, QtCore.QSettings.UserScope , const.orgName, const.projName)
     settings.setFallbacksEnabled(False)
-    # Sqlite stuff
-    # localStorage
-    settings.setValue("LS_connectionName", LS_connectionName)
-    settings.setValue("LS_db", LS_db)
-    settings.setValue("LS_username", LS_username)
-    settings.setValue("LS_password", LS_password)
-    settings.setValue("LS_port", LS_port)
-    # Cache
-    settings.setValue("C_connectionName", C_connectionName)
-    settings.setValue("C_db", C_db)
-    settings.setValue("C_username", C_username)
-    settings.setValue("C_password", C_password)
-    settings.setValue("C_port", C_port)
 
     # check and update music folder location and volume
     musicFolderLocation = "C:\\Users\\Electron\\Music\\test_music_mp3"
