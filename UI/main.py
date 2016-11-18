@@ -51,12 +51,19 @@ def extraSetup(Ui_MainWindow):
     editMetadata.setShortcut('Ctrl+E')
     fetchRecommendation.setShortcut('Ctrl+R')
     # add actions on menu items
+
+    """
+    all events are triggered from here
+    """
+
     openFolder.triggered.connect(Browse)
 
     # Create Qt items
     # mediaPlaylist = QMediaPlaylist()
     # mediaPlayer = QMediaPlayer()
-
+"""
+Event handler for browse open folder action.
+"""
 
 def Browse(self):
     folder = QtWidgets.QFileDialog.getExistingDirectory(None, "Open a folder", os.getenv('HOME'), QtWidgets.QFileDialog.ShowDirsOnly)
