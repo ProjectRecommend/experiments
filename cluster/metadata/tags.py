@@ -7,6 +7,9 @@ run `chcp 65001` if you getting erros releted to unicode in windows
 
 '''
 
+#pip install mutagen
+#pip install BeautifulSoup4
+
 from mutagen.id3 import ID3
 from bs4 import UnicodeDammit
 
@@ -53,7 +56,7 @@ def getMetaText(self):# getter function for metaText
 def getMetadataDict(self):
     return self.metaDataDict
 
-def getMetadataDict(mp3file):
+def getMetadataDict(self,mp3file):
     
 
     audio = ID3(mp3file)
