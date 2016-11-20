@@ -18,7 +18,7 @@ def __init__(self):
     self.metaText = []
 
 
-def getMetadata(mp3file):
+def getMetadata(self,mp3file):
     
 
     audio = ID3(mp3file)
@@ -88,7 +88,7 @@ def getMetadataDict(self,mp3file):
     return self.metaDataDict
 
 
-def metaTextToUnicode(metaText):
+def metaTextToUnicode(self,metaText):
     # print(metaText)
     final = []
     uniText = []
@@ -102,5 +102,4 @@ def metaTextToUnicode(metaText):
         uniText.append(dammit.unicode_markup)
     return uniText
 
-if __name__=="main":
-    getMetadata("D:/Songs(english)/naked/7 Years - Lukas Graham.mp4")
+print (getMetadata("D://Songs(english)//naked//Bony_M_Jingle_Bells.mp3"))
