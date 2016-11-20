@@ -87,10 +87,17 @@ class AccessLocalStorage:
             songDet= ManageMetaData.ReadMetaData(SongPath) #this will read metadata songPath.
 
             #songDet dictionary may not be in thr right order and so it needs to be converted to the correct order.
+            #the expected order is: TIT2,TALB,TPE1,TPE2,TSOP,TDRC,TCON
+            valuesList.append(songDet["TIT2"])
+            valuesList.append(songDet["TALB"])
+            valuesList.append(songDet["TPE1"])
+            valuesList.append(songDet["TPE2"])
+            valuesList.append(songDet["TSOP"])
+            valuesList.append(songDet["TDRC"])
+            valuesList.append(songDet["TCON"])
         """
         the songDet format is always the same
         """ 
-            valuesList=songDet.values()    
             valuesString="" 
             for i in range(9):
                 if not i==8:
