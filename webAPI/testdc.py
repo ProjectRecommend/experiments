@@ -5,7 +5,7 @@ client = dc.Client('test App', user_token="jQgfPZNxlkvrINfWvVjPrtbnfvAQLMrGeJHLy
 
 # result = client.search('Rick Astley', type='master', year='2002')
 # result = client.search('Justin Bieber', type='relese', genre='pop')
-result = client.search('Justin Bieber', type='relese', genre='pop', year='2010')
+result = client.search(artist = 'Justin Bieber', type='relese', genre='pop', year='2010')
 # result = client.search('Never Gonna Give you up', type='release')
 
 # print(dir(result))
