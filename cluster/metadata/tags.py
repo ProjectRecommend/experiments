@@ -10,31 +10,79 @@ run `chcp 65001` if you getting erros releted to unicode in windows
 from mutagen.id3 import ID3
 from bs4 import UnicodeDammit
 
+def __init__(self):
+    self.metaDataDict={}
+    self.metaText = []
+
 
 def getMetadata(mp3file):
-    metaText = []
+    
 
     audio = ID3(mp3file)
     tags = audio.items()
+    """
+    print ("type of tags is:")
+    print (type(tags))
 
+    print ("tags are:")
+    print (tags)
+    """
     for tag in tags:
         if (tag[0] == 'USLT::eng'):
-            metaText.append(str(tag[1]).encode(encoding='utf_8'))
+            self.metaText.append(str(tag[1]).encode(encoding='utf_8'))
         if (tag[0] == 'TALB'):
-            metaText.append(str(tag[1]).encode(encoding='utf_8'))
+            self.metaText.append(str(tag[1]).encode(encoding='utf_8'))
         if (tag[0] == 'TPE1'):
-            metaText.append(str(tag[1]).encode(encoding='utf_8'))
+            self.metaText.append(str(tag[1]).encode(encoding='utf_8'))
         if (tag[0] == 'TPE2'):
-            metaText.append(str(tag[1]).encode(encoding='utf_8'))
+            self.metaText.append(str(tag[1]).encode(encoding='utf_8'))
         if (tag[0] == 'TSOP'):
-            metaText.append(str(tag[1]).encode(encoding='utf_8'))
+            self.metaText.append(str(tag[1]).encode(encoding='utf_8'))
         if (tag[0] == 'TIT2'):
-            metaText.append(str(tag[1]).encode(encoding='utf_8'))
+            self.metaText.append(str(tag[1]).encode(encoding='utf_8'))
         if (tag[0] == 'TCON'):
-            metaText.append(str(tag[1]).encode(encoding='utf_8'))
+            self.metaText.append(str(tag[1]).encode(encoding='utf_8'))
         if (tag[0] == 'TDRC'):
-            metaText.append(str(tag[1]).encode(encoding='utf_8'))
-    return metaText
+            self.metaText.append(str(tag[1]).encode(encoding='utf_8'))
+    return self.metaText
+
+
+def getMetaText(self):# getter function for metaText
+    return self.metaText
+
+def getMetadataDict(self):
+    return self.metaDataDict
+
+def getMetadataDict(mp3file):
+    
+
+    audio = ID3(mp3file)
+    tags = audio.items()
+    """
+    print ("type of tags is:")
+    print (type(tags))
+
+    print ("tags are:")
+    print (tags)
+    """
+    for tag in tags:
+        if (tag[0] == 'USLT::eng'):
+            self.metaDataDict["USLT::eng"]=(str(tag[1]).encode(encoding='utf_8'))
+        if (tag[0] == 'TALB'):
+            self.metaDataDict["TALB"]=(str(tag[1]).encode(encoding='utf_8'))
+        if (tag[0] == 'TPE1'):
+            self.metaDataDict["TPE1"]=(str(tag[1]).encode(encoding='utf_8'))
+        if (tag[0] == 'TPE2'):
+            self.metaDataDict["TPE2"]=(str(tag[1]).encode(encoding='utf_8'))
+        if (tag[0] == 'TSOP'):
+            self.metaDataDict["TSOP"]=(str(tag[1]).encode(encoding='utf_8'))
+        if (tag[0] == 'TIT2'):
+            self.metaDataDict["TIT2"]=(str(tag[1]).encode(encoding='utf_8'))
+        if (tag[0] == 'TCON'):
+            self.metaDataDict["TCON"]=(str(tag[1]).encode(encoding='utf_8'))
+        if (tag[0] == 'TDRC'):
+            self.metaDataDict["TDRC"]=(str(tag[1]).encode(encoding='utf_8'))
+    return self.metaDataDict
 
 
 def metaTextToUnicode(metaText):
@@ -50,3 +98,6 @@ def metaTextToUnicode(metaText):
         dammit = UnicodeDammit(text)
         uniText.append(dammit.unicode_markup)
     return uniText
+
+if __name__=="main":
+    getMetadata("D:/Songs(english)/naked/7 Years - Lukas Graham.mp4")

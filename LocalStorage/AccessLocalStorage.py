@@ -86,6 +86,7 @@ class AccessLocalStorage:
             songDet={}
             songDet= ManageMetaData.ReadMetaData(SongPath) #this will read metadata songPath.
 
+            #songDet dictionary may not be in thr right order and so it needs to be converted to the correct order.
         """
         the songDet format is always the same
         """ 
@@ -98,12 +99,14 @@ class AccessLocalStorage:
                     valuesString=valuesString+valuesList[i]
             queryString="select * from songs"
             record=self.query.exec_(queryString)
+
+
             size=0
 
             while self.query.next():
                 size=size+1
 
-            valuesString=str(size+1)+","+valuesString
+            valuesString=str(size+1)+","+SongPath+","+"0,"+valuesString
 
             queryString="insert into songs (SID,SPath,isUpdated,TIT2,TALB,TPE1,TPE2,TSOP,TDRC,TCON) values ("+valuesString+")"
             isQuerySuccessful=query.exec_(queryString); 
